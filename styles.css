@@ -1,3 +1,5 @@
+/* Final narrow-screen fleet sizing */
+@media(max-width:820px){.fleet__visual{overflow:hidden}.fleet__visual .fleet-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%;max-width:100%;overflow:hidden!important;padding-bottom:0}.fleet__visual .fleet-gallery figure{width:100%;min-width:0}}
 /* Prevent mobile horizontal overflow */
 html,body{max-width:100%;overflow-x:hidden}.fleet__grid,.fleet__visual,.fleet__content{min-width:0}.fleet-gallery{width:100%;max-width:100%;min-width:0}@media(max-width:820px){.fleet-gallery{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}.fleet-gallery::-webkit-scrollbar{display:none}.fleet-gallery figure{flex:0 0 calc((100% - 20px)/3);min-width:0}.fleet__grid{width:100%}.fleet__visual{width:100%}}
 /* Theme switcher */
