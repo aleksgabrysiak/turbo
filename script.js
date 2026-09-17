@@ -67,20 +67,38 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.setAttribute('role', 'dialog');
     lightbox.setAttribute('aria-modal', 'true');
     lightbox.setAttribute('aria-label', 'Podgląd zdjęcia floty');
-    lightbox.innerHTML = '<button class="lightbox__close" type="button" aria-label="Zamknij zdjęcie">&times;</button><button class="lightbox__arrow lightbox__arrow--prev" type="button" aria-label="Poprzednie zdjęcie">&#8592;</button><img class="lightbox__image" alt="" /><button class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Następne zdjęcie">&#8594;</button>';
+    lightbox.innerHTML = '<button class="lightbox__close" type="button" aria-label="Zamknij zdjęcie">&times;</button><button class="lightbox__arrow lightbox__arrow--prev" type="button" aria-label="Poprzednie zdjęcie">&#8592;</button><img class="lightbox__image" alt="" /><button class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Następne zdjęcie">&#8594;</button><div class="lightbox__zoom-controls" aria-label="Powiększenie zdjęcia"><button type="button" data-zoom="out" aria-label="Pomniejsz zdjęcie">−</button><button type="button" data-zoom="reset" aria-label="Resetuj powiększenie">100%</button><button type="button" data-zoom="in" aria-label="Powiększ zdjęcie">+</button></div>';
     document.body.append(lightbox);
 
     const lightboxImage = lightbox.querySelector('.lightbox__image');
+    const processGallery = document.querySelector('.process-modal__screenshots');
+    const processSlides = processGallery
+      ? [...processGallery.querySelectorAll('figure')].map((figure) => {
+        const image = figure.querySelector('img');
+        return { src: image?.src, alt: image?.alt };
+      }).filter((slide) => slide.src)
+      : [];
+    let activeSlides = [];
+    let zoomLevel = 1;
+    const applyZoom = () => {
+      lightboxImage.style.transform = `scale(${zoomLevel})`;
+      lightboxImage.closest('.lightbox')?.style.setProperty('--lightbox-zoom', zoomLevel);
+      lightbox.querySelector('[data-zoom="reset"]').textContent = `${Math.round(zoomLevel * 100)}%`;
+    };
     const closeLightbox = () => {
       lightbox.classList.remove('is-open');
       document.body.classList.remove('lightbox-open');
+      lightboxImage.style.transform = '';
     };
     let lightboxImageIndex = 0;
-    const openLightbox = (index) => {
-      if (!fleetSlides.length) return;
-      lightboxImageIndex = (index + fleetSlides.length) % fleetSlides.length;
-      lightboxImage.src = fleetSlides[lightboxImageIndex].src;
-      lightboxImage.alt = fleetSlides[lightboxImageIndex].alt;
+    const openLightbox = (index, slides = activeSlides) => {
+      if (!slides.length) return;
+      activeSlides = slides;
+      lightboxImageIndex = (index + activeSlides.length) % activeSlides.length;
+      lightboxImage.src = activeSlides[lightboxImageIndex].src;
+      lightboxImage.alt = activeSlides[lightboxImageIndex].alt;
+      zoomLevel = 1;
+      applyZoom();
       lightbox.classList.add('is-open');
       document.body.classList.add('lightbox-open');
     };
@@ -115,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const nextButton = fleetStage.querySelector('.fleet-arrow--next');
       previousButton.addEventListener('click', () => showFleetImage(currentFleetImage - 1));
       nextButton.addEventListener('click', () => showFleetImage(currentFleetImage + 1));
-      stageImage.addEventListener('click', () => openLightbox(currentFleetImage));
+      stageImage.addEventListener('click', () => openLightbox(currentFleetImage, fleetSlides));
       stageImage.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
@@ -127,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (event.key === 'Enter' || event.key === ' ' || event.code === 'Space') {
           event.preventDefault();
-          openLightbox(currentFleetImage);
+          openLightbox(currentFleetImage, fleetSlides);
         }
       });
     }
@@ -147,6 +165,27 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
     lightbox.querySelector('.lightbox__arrow--prev').addEventListener('click', () => openLightbox(lightboxImageIndex - 1));
     lightbox.querySelector('.lightbox__arrow--next').addEventListener('click', () => openLightbox(lightboxImageIndex + 1));
+    lightbox.querySelectorAll('[data-zoom]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.zoom === 'in') zoomLevel = Math.min(3, zoomLevel + 0.25);
+        if (button.dataset.zoom === 'out') zoomLevel = Math.max(1, zoomLevel - 0.25);
+        if (button.dataset.zoom === 'reset') zoomLevel = 1;
+        applyZoom();
+      });
+    });
+    processGallery?.querySelectorAll('figure').forEach((figure, index) => {
+      const image = figure.querySelector('img');
+      if (!image) return;
+      figure.tabIndex = 0;
+      figure.setAttribute('role', 'button');
+      figure.setAttribute('aria-label', `Otwórz ${image.alt}`);
+      figure.addEventListener('click', () => openLightbox(index, processSlides));
+      figure.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openLightbox(index, processSlides);
+      });
+    });
     lightbox.addEventListener('click', (event) => {
       if (event.target === lightbox) closeLightbox();
     });
@@ -155,6 +194,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!lightbox.classList.contains('is-open')) return;
       if (event.key === 'ArrowLeft') openLightbox(lightboxImageIndex - 1);
       if (event.key === 'ArrowRight') openLightbox(lightboxImageIndex + 1);
+      if (event.key === '+' || event.key === '=') {
+        zoomLevel = Math.min(3, zoomLevel + 0.25);
+        applyZoom();
+      }
+      if (event.key === '-') {
+        zoomLevel = Math.max(1, zoomLevel - 0.25);
+        applyZoom();
+      }
+      if (event.key === '0') {
+        zoomLevel = 1;
+        applyZoom();
+      }
     });
   }
 
