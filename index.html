@@ -114,18 +114,20 @@
     </style>
   </head>
   <body>
-    <div class="topbar">
+    <div class="topbar" id="top">
       <div class="container topbar__inner">
         <span><i data-lucide="map-pin"></i>Zielona Góra i okolice</span
         ><span class="topbar__hours">Pon–Pt: 8:00–20:00</span>
       </div>
     </div>
 
-    <header class="site-header" id="top">
+    <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="#top" aria-label="OSK Turbo - strona główna">
           <img class="brand__logo brand__logo--pink" src="assets/turbo_logo_1.png" alt="OSK Turbo" />
+          <img class="brand__logo brand__logo--pink-flame" src="assets/turbo_logo_1.png" alt="" aria-hidden="true" />
           <img class="brand__logo brand__logo--gold" src="assets/turbo_logo_2.png" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold-flame" src="assets/turbo_logo_2.png" alt="" aria-hidden="true" />
         </a>
         <div class="nav-actions">
           <button
@@ -807,6 +809,9 @@
             </button>
             <div class="testimonial-track carousel-track">
               <article class="testimonial-card">
+                <div class="testimonial-rating" aria-label="Ocena: 5 na 5">
+                  <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+                </div>
                 <div class="quote-mark">“</div>
                 <blockquote>
                   Teoria online bardzo ułatwiła mi start, a jazdy mogłam
@@ -821,6 +826,9 @@
                 </div>
               </article>
               <article class="testimonial-card">
+                <div class="testimonial-rating" aria-label="Ocena: 5 na 5">
+                  <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+                </div>
                 <div class="quote-mark">“</div>
                 <blockquote>
                   Największy plus to jazdy na Hyundaiu i20 podobnym do auta
@@ -835,6 +843,9 @@
                 </div>
               </article>
               <article class="testimonial-card">
+                <div class="testimonial-rating" aria-label="Ocena: 5 na 5">
+                  <i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i><i data-lucide="star" aria-hidden="true"></i>
+                </div>
                 <div class="quote-mark">“</div>
                 <blockquote>
                   Na motocyklu instruktor prowadził mnie krok po kroku. Dostałem
@@ -881,15 +892,40 @@
               >
             </div>
           </div>
+          <div class="contact__action">
+            <div class="eyebrow eyebrow--light">Szybki kontakt</div>
+            <h3>Wolisz zostawić wiadomość?</h3>
+            <p>Wypełnij krótki formularz, a odezwiemy się z informacjami o kursie.</p>
+            <button class="button button--accent" type="button" data-process-modal="contact-form">
+              Otwórz formularz <i data-lucide="arrow-up-right"></i>
+            </button>
+          </div>
         </div>
       </section>
     </main>
+
+    <div class="process-modal contact-form-modal" data-process-dialog="contact-form" hidden role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
+      <div class="process-modal__backdrop" data-process-close></div>
+      <div class="process-modal__content">
+        <button class="process-modal__close" type="button" aria-label="Zamknij formularz" data-process-close>&times;</button>
+        <div class="eyebrow">Formularz kontaktowy</div>
+        <h2 id="contact-form-title">Napisz do nas.</h2>
+        <iframe
+          class="contact-form-modal__iframe"
+          src="https://forms.gle/daFrkLwP4N2oTpi78"
+          title="Formularz kontaktowy OSK Turbo"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="container footer__top">
         <a class="brand brand--footer" href="#top" aria-label="OSK Turbo - strona główna">
           <img class="brand__logo brand__logo--pink" src="assets/turbo_logo_1.png" alt="OSK Turbo" />
+          <img class="brand__logo brand__logo--pink-flame" src="assets/turbo_logo_1.png" alt="" aria-hidden="true" />
           <img class="brand__logo brand__logo--gold" src="assets/turbo_logo_2.png" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold-flame" src="assets/turbo_logo_2.png" alt="" aria-hidden="true" />
         </a>
         <p>Nauka jazdy B, A1, A2 i A · Zielona Góra</p>
         <div class="socials">
