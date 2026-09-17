@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.append(lightbox);
 
     const lightboxImage = lightbox.querySelector('.lightbox__image');
+    lightbox.style.touchAction = 'none';
+    lightboxImage.draggable = false;
     const processGallery = document.querySelector('.process-modal__screenshots');
     const processSlides = processGallery
       ? [...processGallery.querySelectorAll('figure')].map((figure) => {
@@ -243,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gestureStart = { x: event.clientX, y: event.clientY, panX, panY };
       }
     });
+    lightboxImage.addEventListener('dragstart', (event) => event.preventDefault());
     lightboxImage.addEventListener('pointermove', (event) => {
       if (!activePointers.has(event.pointerId)) return;
       event.preventDefault();
