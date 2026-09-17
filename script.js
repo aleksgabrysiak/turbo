@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const ticker = document.querySelector('.ticker-inner');
+  const tickerItems = ticker ? [...ticker.querySelectorAll('span')] : [];
+  const previousTickerButton = document.querySelector('.ticker-button--prev');
+  const nextTickerButton = document.querySelector('.ticker-button--next');
+  let tickerIndex = 0;
+  let tickerDirection = 1;
+  const showTickerItem = (nextIndex) => {
+    if (!ticker || !tickerItems.length) return;
+    tickerIndex = Math.max(0, Math.min(tickerItems.length - 1, nextIndex));
+    ticker.scrollTo({ left: tickerIndex * ticker.clientWidth, behavior: 'smooth' });
+  };
+  const advanceTicker = () => {
+    if (!ticker || window.innerWidth > 820 || tickerItems.length < 2) return;
+    if (tickerIndex === tickerItems.length - 1) tickerDirection = -1;
+    if (tickerIndex === 0) tickerDirection = 1;
+    showTickerItem(tickerIndex + tickerDirection);
+  };
+  if (ticker) window.setInterval(advanceTicker, 3200);
+  previousTickerButton?.addEventListener('click', () => {
+    tickerDirection = -1;
+    showTickerItem(tickerIndex - 1);
+  });
+  nextTickerButton?.addEventListener('click', () => {
+    tickerDirection = 1;
+    showTickerItem(tickerIndex + 1);
+  });
+
   document.querySelectorAll('.instructor-card').forEach((card, index) => {
     const image = card.querySelector('img');
     const title = card.querySelector('h3');
@@ -80,11 +107,39 @@ document.addEventListener('DOMContentLoaded', () => {
       : [];
     let activeSlides = [];
     let zoomLevel = 1;
+    let panX = 0;
+    let panY = 0;
+    const activePointers = new Map();
+    let gestureStart = null;
     const applyZoom = () => {
-      lightboxImage.style.transform = `scale(${zoomLevel})`;
+      lightboxImage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${zoomLevel})`;
       lightboxImage.closest('.lightbox')?.style.setProperty('--lightbox-zoom', zoomLevel);
       lightbox.querySelector('[data-zoom="reset"]').textContent = `${Math.round(zoomLevel * 100)}%`;
     };
+    const setZoom = (nextZoom, focalPoint) => {
+      const previousZoom = zoomLevel;
+      const boundedZoom = Math.min(3, Math.max(1, nextZoom));
+      if (focalPoint && previousZoom > 0) {
+        const centerX = lightbox.clientWidth / 2;
+        const centerY = lightbox.clientHeight / 2;
+        const imagePointX = (focalPoint.x - centerX - panX) / previousZoom;
+        const imagePointY = (focalPoint.y - centerY - panY) / previousZoom;
+        panX = focalPoint.x - centerX - imagePointX * boundedZoom;
+        panY = focalPoint.y - centerY - imagePointY * boundedZoom;
+      }
+      zoomLevel = boundedZoom;
+      if (zoomLevel === 1) {
+        panX = 0;
+        panY = 0;
+      }
+      applyZoom();
+    };
+    const getPointerPair = () => [...activePointers.values()].slice(0, 2);
+    const getPointerDistance = (first, second) => Math.hypot(second.x - first.x, second.y - first.y);
+    const getPointerMidpoint = (first, second) => ({
+      x: (first.x + second.x) / 2,
+      y: (first.y + second.y) / 2,
+    });
     const closeLightbox = () => {
       lightbox.classList.remove('is-open');
       document.body.classList.remove('lightbox-open');
@@ -98,6 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxImage.src = activeSlides[lightboxImageIndex].src;
       lightboxImage.alt = activeSlides[lightboxImageIndex].alt;
       zoomLevel = 1;
+      panX = 0;
+      panY = 0;
       applyZoom();
       lightbox.classList.add('is-open');
       document.body.classList.add('lightbox-open');
@@ -167,12 +224,53 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.querySelector('.lightbox__arrow--next').addEventListener('click', () => openLightbox(lightboxImageIndex + 1));
     lightbox.querySelectorAll('[data-zoom]').forEach((button) => {
       button.addEventListener('click', () => {
-        if (button.dataset.zoom === 'in') zoomLevel = Math.min(3, zoomLevel + 0.25);
-        if (button.dataset.zoom === 'out') zoomLevel = Math.max(1, zoomLevel - 0.25);
-        if (button.dataset.zoom === 'reset') zoomLevel = 1;
-        applyZoom();
+        if (button.dataset.zoom === 'in') setZoom(zoomLevel + 0.25);
+        if (button.dataset.zoom === 'out') setZoom(zoomLevel - 0.25);
+        if (button.dataset.zoom === 'reset') setZoom(1);
       });
     });
+    lightboxImage.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      lightboxImage.setPointerCapture(event.pointerId);
+      activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (activePointers.size === 2) {
+        const [first, second] = getPointerPair();
+        gestureStart = {
+          distance: getPointerDistance(first, second),
+          zoom: zoomLevel,
+        };
+      } else {
+        gestureStart = { x: event.clientX, y: event.clientY, panX, panY };
+      }
+    });
+    lightboxImage.addEventListener('pointermove', (event) => {
+      if (!activePointers.has(event.pointerId)) return;
+      event.preventDefault();
+      activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (activePointers.size >= 2 && gestureStart?.distance) {
+        const [first, second] = getPointerPair();
+        const midpoint = getPointerMidpoint(first, second);
+        const distanceRatio = getPointerDistance(first, second) / gestureStart.distance;
+        setZoom(gestureStart.zoom * distanceRatio, midpoint);
+        return;
+      }
+      if (activePointers.size === 1 && zoomLevel > 1 && gestureStart?.x !== undefined) {
+        panX = gestureStart.panX + event.clientX - gestureStart.x;
+        panY = gestureStart.panY + event.clientY - gestureStart.y;
+        applyZoom();
+      }
+    });
+    const endPointerGesture = (event) => {
+      activePointers.delete(event.pointerId);
+      if (activePointers.size === 1) {
+        const [remaining] = getPointerPair();
+        gestureStart = { x: remaining.x, y: remaining.y, panX, panY };
+      } else if (!activePointers.size) {
+        gestureStart = null;
+      }
+    };
+    lightboxImage.addEventListener('pointerup', endPointerGesture);
+    lightboxImage.addEventListener('pointercancel', endPointerGesture);
     processGallery?.querySelectorAll('figure').forEach((figure, index) => {
       const image = figure.querySelector('img');
       if (!image) return;
@@ -195,16 +293,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (event.key === 'ArrowLeft') openLightbox(lightboxImageIndex - 1);
       if (event.key === 'ArrowRight') openLightbox(lightboxImageIndex + 1);
       if (event.key === '+' || event.key === '=') {
-        zoomLevel = Math.min(3, zoomLevel + 0.25);
-        applyZoom();
+        setZoom(zoomLevel + 0.25);
       }
       if (event.key === '-') {
-        zoomLevel = Math.max(1, zoomLevel - 0.25);
-        applyZoom();
+        setZoom(zoomLevel - 0.25);
       }
       if (event.key === '0') {
-        zoomLevel = 1;
-        applyZoom();
+        setZoom(1);
       }
     });
   }

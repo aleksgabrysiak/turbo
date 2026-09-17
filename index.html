@@ -123,11 +123,10 @@
 
     <header class="site-header" id="top">
       <div class="container nav-wrap">
-        <a class="brand" href="#top" aria-label="OSK Turbo - strona główna"
-          ><span class="brand__mark"
-            ><img src="assets/favicon-192x192.jpg" alt="" /></span
-          ><span>OSK <span>Turbo</span></span></a
-        >
+        <a class="brand" href="#top" aria-label="OSK Turbo - strona główna">
+          <img class="brand__logo brand__logo--pink" src="assets/turbo_logo_1.png" alt="OSK Turbo" />
+          <img class="brand__logo brand__logo--gold" src="assets/turbo_logo_2.png" alt="" aria-hidden="true" />
+        </a>
         <div class="nav-actions">
           <button
             class="theme-toggle"
@@ -198,11 +197,19 @@
           </div>
         </div>
         <div class="hero__ticker">
-          <div class="container ticker-inner">
-            <span>▦ Kategoria B</span>
+          <div class="container ticker-controls">
+            <button class="ticker-button ticker-button--prev" type="button" aria-label="Poprzedni komunikat tickera">
+              <i data-lucide="chevron-left"></i>
+            </button>
+            <div class="ticker-inner">
+            <span>▦ Kategorie A1,A2,A oraz B</span>
             <span>▦ Jazdy doszkalające</span>
-            <span>▦ Automatyczna skrzynia</span>
+            <span>▦ Manualna skrzynia</span>
             <span>▦ Kurs ekspresowy</span>
+            </div>
+            <button class="ticker-button ticker-button--next" type="button" aria-label="Następny komunikat tickera">
+              <i data-lucide="chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>
