@@ -82,6 +82,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const testimonialsTrack = document.querySelector('[data-testimonials-manifest]');
+  if (testimonialsTrack) {
+    const initialsFromName = (name) => name
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part[0])
+      .join('')
+      .slice(0, 2)
+      .toUpperCase();
+    const formatAuthor = (name) => {
+      const parts = String(name || 'Kursant').trim().split(/\s+/).filter(Boolean);
+      if (parts.length < 2 || /^\p{L}\.?$/u.test(parts[parts.length - 1])) return parts.join(' ');
+      const surnameInitial = parts[parts.length - 1].charAt(0).toUpperCase();
+      return `${parts[0]} ${surnameInitial}.`;
+    };
+    const renderTestimonials = async () => {
+      try {
+        const response = await fetch(testimonialsTrack.dataset.testimonialsManifest, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Nie udało się wczytać opinii.');
+        const testimonials = await response.json();
+        if (!Array.isArray(testimonials)) throw new Error('Nieprawidłowy format pliku opinii.');
+
+        const fragment = document.createDocumentFragment();
+        testimonials.forEach((testimonial) => {
+          const card = document.createElement('article');
+          card.className = 'testimonial-card';
+
+          const rating = document.createElement('div');
+          rating.className = 'testimonial-rating';
+          const score = Math.max(0, Math.min(5, Number(testimonial.rating) || 0));
+          rating.setAttribute('aria-label', `Ocena: ${score} na 5`);
+          for (let starIndex = 1; starIndex <= 5; starIndex += 1) {
+            const star = document.createElement('i');
+            star.dataset.lucide = 'star';
+            star.setAttribute('aria-hidden', 'true');
+            if (starIndex > score) star.classList.add('testimonial-rating__empty');
+            rating.append(star);
+          }
+
+          const quoteMark = document.createElement('div');
+          quoteMark.className = 'quote-mark';
+          quoteMark.textContent = '“';
+          const quote = document.createElement('blockquote');
+          quote.textContent = testimonial.opinion || '';
+
+          const author = document.createElement('div');
+          author.className = 'quote-author';
+          const avatar = document.createElement('span');
+          avatar.className = 'author-avatar';
+          avatar.textContent = testimonial.avatar || initialsFromName(testimonial.author || 'Kursant');
+          const authorDetails = document.createElement('span');
+          const authorName = document.createElement('strong');
+          authorName.textContent = formatAuthor(testimonial.author);
+          const authorMeta = document.createElement('small');
+          authorMeta.textContent = testimonial.category || '';
+          authorDetails.append(authorName, authorMeta);
+          author.append(avatar, authorDetails);
+          card.append(rating, quoteMark, quote, author);
+          fragment.append(card);
+        });
+        testimonialsTrack.replaceChildren(fragment);
+        if (window.lucide) lucide.createIcons();
+        window.dispatchEvent(new Event('resize'));
+      } catch (error) {
+        testimonialsTrack.innerHTML = '<p class="testimonials__status">Nie udało się wczytać opinii.</p>';
+        console.warn('Opinie nie zostały wczytane.', error);
+      }
+    };
+    renderTestimonials();
+  }
+
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     document.querySelectorAll('.process-modal:not([hidden])').forEach(closeProcessModal);
