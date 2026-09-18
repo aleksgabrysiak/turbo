@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Jarek",
+    "categories": "Instruktor kat. AM, A1, A2, A, B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Jarek, instruktor jazdy"
+  },
+  {
+    "name": "Przemek",
+    "categories": "Instruktor kat. AM, A1, A2, A, B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Przemek, instruktor jazdy"
+  },
+  {
+    "name": "Ania",
+    "categories": "Instruktorka kat. AM, A1, A2, A, B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktorki.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Ania, instruktorka jazdy"
+  },
+  {
+    "name": "Michał T.",
+    "categories": "Instruktor kat. B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Michał T., instruktor jazdy"
+  },
+  {
+    "name": "Kinga",
+    "categories": "Instruktorka kat. B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktorki.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Kinga, instruktorka jazdy"
+  },
+  {
+    "name": "Sebastian",
+    "categories": "Instruktor kat. AM, A1, A2, A",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Sebastian, instruktor jazdy"
+  },
+  {
+    "name": "Sławek",
+    "categories": "Instruktor kat. B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Sławek, instruktor jazdy"
+  },
+  {
+    "name": "Michał S.",
+    "categories": "Instruktor kat. B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktora.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Michał S., instruktor jazdy"
+  },
+  {
+    "name": "Monika",
+    "categories": "Instruktorka kat. B",
+    "specialization": "Miejsce na specjalizację i doświadczenie",
+    "bio": "Placeholder na krótkie bio instruktorki.",
+    "image": "assets/osk-turbo3.jpg",
+    "imageAlt": "Monika, instruktorka jazdy"
+  }
+]

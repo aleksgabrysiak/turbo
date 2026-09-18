@@ -148,6 +148,23 @@
         <nav class="main-nav" aria-label="Główna nawigacja">
           <a href="#kursy">Kursy</a><a href="#flota">Nasza flota</a
           ><a href="#o-nas">O nas</a><a href="#jak-zaczac">Jak zacząć</a>
+          <details class="nav-socials">
+            <summary>Social media <i data-lucide="chevron-down"></i></summary>
+            <div class="nav-socials__menu">
+              <a href="https://www.facebook.com/p/OSK-Turbo-61565422284140/?_rdr" target="_blank" rel="noopener noreferrer">
+                <svg class="facebook-icon nav-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M24 12.07C24 5.43 18.63 0 12 0S0 5.43 0 12.07c0 6.02 4.39 11 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.58-4.71 1.33 0 2.72.24 2.72.24v3.01H15.9c-1.51 0-1.98.94-1.98 1.9v2.22h3.37l-.54 3.49h-2.83V24C19.61 23.07 24 18.09 24 12.07Z" />
+                </svg> Facebook
+              </a>
+              <a href="https://www.instagram.com/turbo_osk/" target="_blank" rel="noopener noreferrer">
+                <svg class="instagram-icon nav-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg> Instagram
+              </a>
+            </div>
+          </details>
           <a class="button button--small button--dark" href="#kontakt"
             >Kontakt <i data-lucide="arrow-up-right"></i
           ></a>
@@ -156,66 +173,6 @@
     </header>
 
     <main>
-      <!--<section class="hero">
-        <div class="container hero__grid">
-          <div class="hero__content reveal">
-            <div class="eyebrow">
-              <span class="eyebrow__dot"></span> OSK Turbo · Zielona Góra
-            </div>
-            <h1>Nauka jazdy w Zielonej Górze: <em>B, AM, A1, A2 i A.</em></h1>
-            <p class="hero__lead">
-              Prowadzimy kursy prawa jazdy z zajęciami teoretycznymi w formie e-learningu oraz
-              jazdami na flocie zgodnej z wymaganiami egzaminacyjnymi.
-            </p>
-            <div class="hero__actions">
-              <a class="button button--accent" href="#kursy"
-                >Sprawdź kursy i ceny <i data-lucide="arrow-down"></i></a
-              ><a class="text-link" href="#kontakt"
-                >Skontaktuj się <i data-lucide="arrow-up-right"></i
-              ></a>
-            </div>
-            <div class="hero__proof">
-              <div class="avatars">
-                <span>B</span><span>AM</span><span>A1</span><span>A2</span><span>A</span>
-              </div>
-              <div>
-                <strong>Zapisy codziennie</strong
-                ><small>jazdy nawet 5 razy w tygodniu</small>
-              </div>
-            </div>
-          </div>
-          <div class="hero__visual reveal reveal--delay">
-            <div class="hero-image">
-              <img src="assets/hyundai-i20.png" alt="Hyundai i20 OSK Turbo" />
-            </div>
-            <div class="hero-card hero-card--top">
-              <span class="hero-card__icon"
-                ><i data-lucide="car-front"></i></span
-              ><strong>Hyundai i20</strong><small>samochód kategorii B</small>
-            </div>
-            <div class="hero__route">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-        </div>
-        <div class="hero__ticker">
-          <div class="container ticker-controls">
-            <button class="ticker-button ticker-button--prev" type="button" aria-label="Poprzedni komunikat tickera">
-              <i data-lucide="chevron-left"></i>
-            </button>
-            <div class="ticker-inner">
-            <span>▦ Kategorie B, AM, A1, A2 oraz A</span>
-            <span>▦ Jazdy doszkalające</span>
-            <span>▦ Manualna skrzynia</span>
-            <span>▦ Kurs ekspresowy</span>
-            </div>
-            <button class="ticker-button ticker-button--next" type="button" aria-label="Następny komunikat tickera">
-              <i data-lucide="chevron-right"></i>
-            </button>
-          </div>
-        </div>
-      </section>-->
-
       <section class="hero " id="kursy">
         <div class="container">
           <div class="section-heading">
@@ -236,7 +193,7 @@
             >
               <i data-lucide="arrow-left"></i>
             </button>
-            <div class="course-grid carousel-track">
+            <div class="course-grid carousel-track" data-courses-manifest="courses.json">
               <article class="course-card course-card--featured" data-category="B" tabindex="0">
                 <div class="course-card__top">
                   <span class="course-tag">Najpopularniejszy</span
@@ -545,7 +502,7 @@
             >
               <i data-lucide="arrow-left"></i>
             </button>
-            <div class="instructors carousel-track">
+            <div class="instructors carousel-track" data-instructors-manifest="instructors.json">
               <article class="instructor-card">
                 <div class="instructor-photo">
                   <img
@@ -905,7 +862,7 @@
               <h2>Ważne, żeby po kursie <em>jechać pewniej.</em></h2>
             </div>
             <p>
-              Opinie naszych kursantów pomagają nowym uczestnikom lepiej zrozumieć, czego mogą się spodziewać po kursie.
+              Zobacz, co mówią o nas nasi Kursanci. <a href="https://www.google.com/maps/place/Turbo+nauka+jazdy/@51.9329918,15.486356,128m/data=!3m1!1e3!4m8!3m7!1s0x47061159b44bcab9:0x8b5328de26cd92ad!8m2!3d51.9332506!4d15.4863037!9m1!1b1!16s%2Fg%2F11btyt1dtp?entry=ttu&g_ep=EgoyMDI2MDkxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer"><em>Więcej opinii</em></a>
             </p>
           </div>
           <div class="carousel-shell" data-carousel="testimonials">

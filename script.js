@@ -42,6 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.lucide) lucide.createIcons();
 
+  const instructorsTrack = document.querySelector('[data-instructors-manifest]');
+  if (instructorsTrack) {
+    const renderInstructors = async () => {
+      try {
+        const response = await fetch(instructorsTrack.dataset.instructorsManifest, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Nie udało się wczytać instruktorów.');
+        const instructors = await response.json();
+        if (!Array.isArray(instructors)) throw new Error('Nieprawidłowy format pliku instruktorów.');
+
+        const fragment = document.createDocumentFragment();
+        instructors.forEach((instructor) => {
+          const card = document.createElement('article');
+          card.className = 'instructor-card';
+          const photo = document.createElement('div');
+          photo.className = 'instructor-photo';
+          const image = document.createElement('img');
+          image.src = instructor.image || 'assets/osk-turbo3.jpg';
+          image.alt = instructor.imageAlt || `${instructor.name}, instruktor jazdy`;
+          const chip = document.createElement('span');
+          chip.className = 'instructor-chip';
+          chip.textContent = instructor.categories || '';
+          photo.append(image, chip);
+
+          const info = document.createElement('div');
+          info.className = 'instructor-info';
+          const heading = document.createElement('div');
+          const title = document.createElement('h3');
+          title.textContent = instructor.name || 'Instruktor/ka';
+          const specialization = document.createElement('span');
+          specialization.textContent = instructor.specialization || '';
+          heading.append(title, specialization);
+          const bio = document.createElement('p');
+          bio.textContent = instructor.bio || '';
+          info.append(heading, bio);
+          card.append(photo, info);
+          fragment.append(card);
+        });
+        instructorsTrack.replaceChildren(fragment);
+        window.dispatchEvent(new Event('resize'));
+      } catch (error) {
+        console.warn('Instruktorzy nie zostali wczytani z JSON.', error);
+      }
+    };
+    renderInstructors();
+  }
+
   const themeToggle = document.querySelector('.theme-toggle');
   const savedTheme = window.localStorage.getItem('osk-turbo-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -153,6 +199,84 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTestimonials();
   }
 
+  const courseCategoryDetails = new Map();
+  const coursesTrack = document.querySelector('[data-courses-manifest]');
+  if (coursesTrack) {
+    const renderCourses = async () => {
+      try {
+        const response = await fetch(coursesTrack.dataset.coursesManifest, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Nie udało się wczytać kursów.');
+        const courses = await response.json();
+        if (!Array.isArray(courses)) throw new Error('Nieprawidłowy format pliku kursów.');
+
+        const fragment = document.createDocumentFragment();
+        courses.forEach((course, index) => {
+          courseCategoryDetails.set(course.category, {
+            age: course.minimumAge,
+            paragraphs: course.categoryDescription,
+            sourceUrl: course.sourceUrl,
+          });
+          const card = document.createElement('article');
+          card.className = `course-card${index === 0 ? ' course-card--featured' : ''}`;
+          card.dataset.category = course.category;
+          card.tabIndex = 0;
+
+          const top = document.createElement('div');
+          top.className = 'course-card__top';
+          const tag = document.createElement('span');
+          tag.className = `course-tag${index === 0 ? '' : ' course-tag--light'}`;
+          tag.textContent = course.tag;
+          const number = document.createElement('span');
+          number.className = 'course-number';
+          number.textContent = String(index + 1).padStart(2, '0');
+          top.append(tag, number);
+
+          const title = document.createElement('h3');
+          title.textContent = course.title;
+          const description = document.createElement('p');
+          description.textContent = course.description;
+          const meta = document.createElement('div');
+          meta.className = 'course-meta';
+          (course.meta || []).forEach(({ icon, text }) => {
+            const item = document.createElement('span');
+            const iconElement = document.createElement('i');
+            iconElement.dataset.lucide = icon;
+            item.append(iconElement, ` ${text}`);
+            meta.append(item);
+          });
+
+          const price = document.createElement('div');
+          price.className = 'course-price';
+          const priceText = document.createElement('div');
+          const priceLabel = document.createElement('small');
+          priceLabel.textContent = 'cena';
+          const priceValue = document.createElement('strong');
+          priceValue.textContent = course.price;
+          const currency = document.createElement('sup');
+          currency.textContent = 'PLN';
+          priceValue.append(' ', currency);
+          priceText.append(priceLabel, priceValue);
+          const contactLink = document.createElement('a');
+          contactLink.className = 'circle-link';
+          contactLink.href = '#kontakt';
+          contactLink.setAttribute('aria-label', `Zapytaj o kurs kategorii ${course.category}`);
+          const arrow = document.createElement('i');
+          arrow.dataset.lucide = 'arrow-up-right';
+          contactLink.append(arrow);
+          price.append(priceText, contactLink);
+          card.append(top, title, description, meta, price);
+          fragment.append(card);
+        });
+        coursesTrack.replaceChildren(fragment);
+        if (window.lucide) lucide.createIcons();
+        window.dispatchEvent(new Event('resize'));
+      } catch (error) {
+        console.warn('Kursy nie zostały wczytane z JSON.', error);
+      }
+    };
+    renderCourses();
+  }
+
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     document.querySelectorAll('.process-modal:not([hidden])').forEach(closeProcessModal);
@@ -186,33 +310,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = categoryModal.querySelector('#category-modal-title');
     const modalAge = categoryModal.querySelector('.category-modal__age');
     const modalDescription = categoryModal.querySelector('.category-modal__description');
+    const modalSource = categoryModal.querySelector('.category-modal__source');
     const closeCategoryModal = () => {
       categoryModal.hidden = true;
       document.body.classList.remove('category-modal-open');
     };
     const openCategoryModal = (category) => {
-      const details = categoryDetails[category];
+      const details = courseCategoryDetails.get(category) || categoryDetails[category];
       if (!details) return;
       modalTitle.textContent = `Kategoria ${category}`;
       modalAge.textContent = details.age;
-      modalDescription.innerHTML = details.description;
+      if (Array.isArray(details.paragraphs)) {
+        modalDescription.replaceChildren(...details.paragraphs.map((paragraph) => {
+          const element = document.createElement('p');
+          element.textContent = paragraph;
+          return element;
+        }));
+      } else {
+        modalDescription.innerHTML = details.description;
+      }
+      if (modalSource && details.sourceUrl) modalSource.href = details.sourceUrl;
       categoryModal.hidden = false;
       document.body.classList.add('category-modal-open');
       categoryModal.querySelector('.category-modal__close')?.focus();
       if (window.lucide) lucide.createIcons();
     };
 
-    document.querySelectorAll('[data-category]').forEach((card) => {
-      const showCategory = () => openCategoryModal(card.dataset.category);
-      card.addEventListener('click', (event) => {
-        if (event.target.closest('a, button')) return;
-        showCategory();
-      });
-      card.addEventListener('keydown', (event) => {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        event.preventDefault();
-        showCategory();
-      });
+    document.addEventListener('click', (event) => {
+      const card = event.target.closest('[data-category]');
+      if (!card || event.target.closest('a, button')) return;
+      openCategoryModal(card.dataset.category);
+    });
+    document.addEventListener('keydown', (event) => {
+      const card = event.target.closest('[data-category]');
+      if (!card || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      openCategoryModal(card.dataset.category);
     });
 
     categoryModal.querySelectorAll('[data-category-close]').forEach((closeButton) => {
@@ -485,6 +618,12 @@ document.addEventListener('DOMContentLoaded', () => {
       menuButton?.setAttribute('aria-expanded', 'false');
       if (menuButton) menuButton.innerHTML = '<i data-lucide="menu"></i>';
       if (window.lucide) lucide.createIcons();
+    });
+  });
+
+  document.querySelectorAll('.nav-socials').forEach((socialMenu) => {
+    socialMenu.addEventListener('focusout', (event) => {
+      if (!socialMenu.contains(event.relatedTarget)) socialMenu.removeAttribute('open');
     });
   });
 
