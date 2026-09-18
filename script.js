@@ -87,8 +87,97 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.process-modal:not([hidden])').forEach(closeProcessModal);
   });
 
+  const categoryDetails = {
+    AM: {
+      age: 'Minimalny wiek: 14 lat.',
+      description: '<p>Uprawnia do kierowania motorowerami oraz czterokołowcami lekkimi.</p><p>Motorower to pojazd z silnikiem do 50 cm³ albo z silnikiem elektrycznym do 4 kW, którego konstrukcja ogranicza prędkość do 45 km/h.</p>',
+    },
+    A1: {
+      age: 'Minimalny wiek: 16 lat.',
+      description: '<p>Uprawnia do kierowania motocyklami o pojemności silnika do 125 cm³, mocy do 11 kW i stosunku mocy do masy własnej do 0,1 kW/kg.</p><p>Obejmuje także trójkołowe motocykle o mocy do 15 kW oraz pojazdy kategorii AM.</p>',
+    },
+    A2: {
+      age: 'Minimalny wiek: 18 lat.',
+      description: '<p>Uprawnia do kierowania motocyklami o mocy do 35 kW i stosunku mocy do masy własnej do 0,2 kW/kg.</p><p>Motocykl nie może powstać w wyniku przeróbki pojazdu o mocy ponad dwukrotnie większej. Kategoria obejmuje także pojazdy kategorii AM.</p>',
+    },
+    A: {
+      age: 'Minimalny wiek: 24 lata lub 20 lat, jeśli posiadasz kategorię A2 od co najmniej 2 lat.',
+      description: '<p>Uprawnia do kierowania wszystkimi motocyklami, a także pojazdami kategorii AM.</p><p>Obejmuje również trójkołowe motocykle o mocy powyżej 15 kW.</p>',
+    },
+    B: {
+      age: 'Minimalny wiek: 17 lat.',
+      description: '<p>Uprawnia do kierowania pojazdami samochodowymi o dopuszczalnej masie całkowitej do 3,5 t, z wyjątkiem autobusów i motocykli.</p><p>Obejmuje także pojazdy kategorii AM oraz zestawy z lekką przyczepą do 750 kg, z zachowaniem ograniczeń określonych w przepisach.</p>',
+    },
+  };
+
+  const categoryModal = document.querySelector('[data-category-dialog]');
+  if (categoryModal) {
+    const modalTitle = categoryModal.querySelector('#category-modal-title');
+    const modalAge = categoryModal.querySelector('.category-modal__age');
+    const modalDescription = categoryModal.querySelector('.category-modal__description');
+    const closeCategoryModal = () => {
+      categoryModal.hidden = true;
+      document.body.classList.remove('category-modal-open');
+    };
+    const openCategoryModal = (category) => {
+      const details = categoryDetails[category];
+      if (!details) return;
+      modalTitle.textContent = `Kategoria ${category}`;
+      modalAge.textContent = details.age;
+      modalDescription.innerHTML = details.description;
+      categoryModal.hidden = false;
+      document.body.classList.add('category-modal-open');
+      categoryModal.querySelector('.category-modal__close')?.focus();
+      if (window.lucide) lucide.createIcons();
+    };
+
+    document.querySelectorAll('[data-category]').forEach((card) => {
+      const showCategory = () => openCategoryModal(card.dataset.category);
+      card.addEventListener('click', (event) => {
+        if (event.target.closest('a, button')) return;
+        showCategory();
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        showCategory();
+      });
+    });
+
+    categoryModal.querySelectorAll('[data-category-close]').forEach((closeButton) => {
+      closeButton.addEventListener('click', closeCategoryModal);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !categoryModal.hidden) closeCategoryModal();
+    });
+  }
+
   const fleetGallery = document.querySelector('.fleet-gallery');
   if (fleetGallery) {
+    const initializeFleetGallery = async () => {
+      const manifestPath = fleetGallery.dataset.galleryManifest;
+      if (manifestPath) {
+        try {
+          const response = await fetch(manifestPath, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`Nie udało się wczytać ${manifestPath}`);
+          const galleryImages = await response.json();
+          if (Array.isArray(galleryImages) && galleryImages.length) {
+            fleetGallery.replaceChildren(...galleryImages.map(({ src, alt, caption }) => {
+              const figure = document.createElement('figure');
+              const image = document.createElement('img');
+              image.src = src;
+              image.alt = alt || 'Pojazd floty OSK Turbo';
+              const figcaption = document.createElement('figcaption');
+              figcaption.textContent = caption || image.alt;
+              figure.append(image, figcaption);
+              return figure;
+            }));
+          }
+        } catch (error) {
+          console.warn('Galeria floty używa zdjęć domyślnych.', error);
+        }
+      }
+
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox';
     lightbox.setAttribute('role', 'dialog');
@@ -305,6 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setZoom(1);
       }
     });
+    };
+    initializeFleetGallery();
   }
 
   const menuButton = document.querySelector('.menu-toggle');
