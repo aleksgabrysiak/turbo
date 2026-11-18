@@ -1,0 +1,93 @@
+[
+  {
+    "category": "B",
+    "tag": "Najpopularniejszy",
+    "title": "Kategoria B",
+    "description": "Kurs na samochód osobowy z jazdami na Hyundaiu i20 - identycznym jak na egzaminie.",
+    "meta": [
+      { "icon": "laptop", "text": "Teoria w formie e-learningu" },
+      { "icon": "heart-pulse", "text": "4 godziny pierwszej pomocy" },
+      { "icon": "clock-3", "text": "30 godzin zajęć praktycznych" },
+      { "icon": "piggy-bank", "text": "Przy płatności jednorazowej za całość kursu, otrzymujesz 1 godzinę gratis" }
+    ],
+    "price": "4 200",
+    "minimumAge": "Minimalny wiek: 17 lat.",
+    "categoryDescription": [
+      "Uprawnia do kierowania pojazdami samochodowymi o dopuszczalnej masie całkowitej do 3,5 t, z wyjątkiem autobusów i motocykli.",
+      "Obejmuje także pojazdy kategorii AM oraz zestawy z lekką przyczepą do 750 kg, z zachowaniem ograniczeń określonych w przepisach."
+    ],
+    "sourceUrl": "https://www.gov.pl/web/gov/kategorie-prawa-jazdy"
+  },
+  {
+    "category": "AM",
+    "tag": "Motorower",
+    "title": "Kategoria AM",
+    "description": "Kurs na motorower Romet City50 (2026), z przygotowaniem do egzaminu na kategorię AM.",
+    "meta": [
+      { "icon": "laptop", "text": "Teoria w formie e-learningu" },
+      { "icon": "heart-pulse", "text": "4 godziny pierwszej pomocy" },
+      { "icon": "clock-3", "text": "10 godzin zajęć praktycznych" }
+    ],
+    "price": "1 800",
+    "minimumAge": "Minimalny wiek: 14 lat.",
+    "categoryDescription": [
+      "Uprawnia do kierowania motorowerami oraz czterokołowcami lekkimi.",
+      "Motorower to pojazd z silnikiem do 50 cm3 albo z silnikiem elektrycznym do 4 kW, którego konstrukcja ogranicza prędkość do 45 km/h."
+    ],
+    "sourceUrl": "https://www.gov.pl/web/gov/kategorie-prawa-jazdy"
+  },
+  {
+    "category": "A1",
+    "tag": "Motocykl",
+    "title": "Kategoria A1",
+    "description": "Kurs na motocykl Honda CB125F, z możliwością zdawania na naszym sprzęcie.",
+    "meta": [
+      { "icon": "laptop", "text": "Teoria w formie e-learningu" },
+      { "icon": "heart-pulse", "text": "4 godziny pierwszej pomocy" },
+      { "icon": "clock-3", "text": "20 godzin zajęć praktycznych" }
+    ],
+    "price": "3 500",
+    "minimumAge": "Minimalny wiek: 16 lat.",
+    "categoryDescription": [
+      "Uprawnia do kierowania motocyklami o pojemności silnika do 125 cm3, mocy do 11 kW i stosunku mocy do masy własnej do 0,1 kW/kg.",
+      "Obejmuje także trójkołowe motocykle o mocy do 15 kW oraz pojazdy kategorii AM."
+    ],
+    "sourceUrl": "https://www.gov.pl/web/gov/kategorie-prawa-jazdy"
+  },
+  {
+    "category": "A2",
+    "tag": "Motocykl",
+    "title": "Kategoria A2",
+    "description": "Yamaha MT-07 lub Honda CB500F, jazdy na znanym sprzęcie i przygotowanie pod egzamin.",
+    "meta": [
+      { "icon": "laptop", "text": "Teoria w formie e-learningu" },
+      { "icon": "heart-pulse", "text": "4 godziny pierwszej pomocy" },
+      { "icon": "clock-3", "text": "20 godzin zajęć praktycznych" }
+    ],
+    "price": "3 800",
+    "minimumAge": "Minimalny wiek: 18 lat.",
+    "categoryDescription": [
+      "Uprawnia do kierowania motocyklami o mocy do 35 kW i stosunku mocy do masy własnej do 0,2 kW/kg.",
+      "Motocykl nie może powstać w wyniku przeróbki pojazdu o mocy ponad dwukrotnie większej. Kategoria obejmuje także pojazdy kategorii AM."
+    ],
+    "sourceUrl": "https://www.gov.pl/web/gov/kategorie-prawa-jazdy"
+  },
+  {
+    "category": "A",
+    "tag": "Motocykl",
+    "title": "Kategoria A",
+    "description": "Kurs na Yamaha MT-07 (2025), z jazdami przygotowującymi do egzaminu kategorii A.",
+    "meta": [
+      { "icon": "laptop", "text": "Teoria w formie e-learningu" },
+      { "icon": "heart-pulse", "text": "4 godziny pierwszej pomocy" },
+      { "icon": "clock-3", "text": "20 godzin zajęć praktycznych" }
+    ],
+    "price": "4 000",
+    "minimumAge": "Minimalny wiek: 24 lata lub 20 lat, jeśli posiadasz kategorię A2 od co najmniej 2 lat.",
+    "categoryDescription": [
+      "Uprawnia do kierowania wszystkimi motocyklami, a także pojazdami kategorii AM.",
+      "Obejmuje również trójkołowe motocykle o mocy powyżej 15 kW."
+    ],
+    "sourceUrl": "https://www.gov.pl/web/gov/kategorie-prawa-jazdy"
+  }
+]

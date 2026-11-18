@@ -1,0 +1,1028 @@
+<!doctype html>
+<html <?php language_attributes(); ?>>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="OSK Turbo Zielona Góra - kursy prawa jazdy kategorii B, AM, A1, A2 i A."
+    />
+    <?php wp_head(); ?>
+    <style>
+      :root {
+        --lime: #63b3ff;
+        --orange: #1769d2;
+        --dark: #102a43;
+        --ink: #15283b;
+        --paper: #f4f8fc;
+      }
+      .brand > span:last-child > span {
+        color: #1769d2;
+      }
+      .hero {
+        background: #eaf4ff;
+      }
+      .fleet {
+        background: #edf6ff;
+      }
+      .process {
+        background: #f1f7fc;
+      }
+      .instructor-chip,
+      .course-tag {
+        background: #bfe3ff;
+      }
+      .course-card--featured {
+        background: #102a43;
+        border-color: #102a43;
+      }
+      em,
+      .eyebrow {
+        color: #1769d2;
+      }
+      .eyebrow__dot {
+        background: #63b3ff;
+      }
+      .course-meta svg,
+      .fleet-icon,
+      .process-grid svg {
+        color: #1769d2;
+      }
+      .hero-card__icon--green {
+        color: #1769d2;
+        background: #dceeff;
+      }
+      .hero-card--bottom {
+        min-width: 180px;
+      }
+      .hero-card--bottom strong {
+        white-space: nowrap;
+        font-size: 16px;
+      }
+      .hero-card--bottom small {
+        white-space: nowrap;
+      }
+      @media (max-width: 820px) {
+        .hero-card--bottom {
+          min-width: 166px;
+          right: 0;
+        }
+      }
+      .testimonial-heading {
+        margin-bottom: 34px;
+      }
+      .testimonial-heading > p {
+        max-width: 330px;
+      }
+      .testimonial-track > .testimonial-card {
+        flex: 0 0 40%;
+        min-height: 300px;
+        padding: 30px 32px;
+        background: var(--dark);
+        color: #fff;
+        scroll-snap-align: start;
+      }
+      .testimonial-card .quote-mark {
+        margin: 12px 0 20px;
+        font-size: 68px;
+      }
+      .testimonial-card blockquote {
+        margin: 0 0 32px;
+        font-family: var(--serif);
+        font-size: 19px;
+        line-height: 1.4;
+        letter-spacing: -0.5px;
+      }
+      .testimonial-card .quote-author {
+        margin-top: auto;
+      }
+      @media (max-width: 820px) {
+        .testimonial-track > .testimonial-card {
+          flex-basis: calc(88% - 6px);
+        }
+        .testimonial-heading {
+          margin-bottom: 28px;
+        }
+        .about__grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .about__grid > div {
+          min-width: 0;
+        }
+        .about .stats {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px 20px;
+        }
+        .about .stats span {
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body <?php body_class(); ?> data-theme-asset-base="<?php echo esc_url(get_theme_file_uri('/assets')); ?>">
+    <?php wp_body_open(); ?>
+    <div class="topbar" id="top">
+      <div class="container topbar__inner">
+        <span><i data-lucide="map-pin"></i>Zielona Góra i okolice</span
+        ><span class="topbar__hours">Pon–Pt: 8:00–20:00</span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#top" aria-label="OSK Turbo - strona główna">
+          <img class="brand__logo brand__logo--pink" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_1.png')); ?>" alt="OSK Turbo" />
+          <img class="brand__logo brand__logo--pink-flame" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_1.png')); ?>" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_2.png')); ?>" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold-flame" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_2.png')); ?>" alt="" aria-hidden="true" />
+        </a>
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="Włącz tryb ciemny"
+            aria-pressed="false"
+          >
+            <i data-lucide="moon"></i></button
+          ><button
+            class="menu-toggle"
+            aria-label="Otwórz menu"
+            aria-expanded="false"
+          >
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <nav class="main-nav" aria-label="Główna nawigacja">
+          <details class="nav-socials">
+            <summary><a style="align-items: center; display: flex;"><i data-lucide="thumbs-up"></i>&nbsp;Social media</a> <i data-lucide="chevron-down"></i></summary>
+            <div class="nav-socials__menu">
+              <a href="https://www.facebook.com/p/OSK-Turbo-61565422284140/?_rdr" target="_blank" rel="noopener noreferrer">
+                <svg class="facebook-icon nav-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M24 12.07C24 5.43 18.63 0 12 0S0 5.43 0 12.07c0 6.02 4.39 11 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.58-4.71 1.33 0 2.72.24 2.72.24v3.01H15.9c-1.51 0-1.98.94-1.98 1.9v2.22h3.37l-.54 3.49h-2.83V24C19.61 23.07 24 18.09 24 12.07Z" />
+                </svg> Facebook
+              </a>
+              <a href="https://www.instagram.com/turbo_osk/" target="_blank" rel="noopener noreferrer">
+                <svg class="camera-mark nav-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg> Instagram
+              </a>
+            </div>
+          </details>
+          <a href="#kursy">Kursy</a>
+          <a href="#flota">Nasza flota</a
+          ><a href="#o-nas">O nas</a>
+          <a href="#jak-zaczac">Jak zacząć</a>
+          
+          <a class="button button--small button--dark" href="#kontakt"
+            >Kontakt <i data-lucide="arrow-up-right"></i
+          ></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero " id="kursy">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Oferta OSK Turbo</div>
+              <h2>Wybierz swoją <em>kategorię.</em></h2>
+            </div>
+            <p>
+              Kursy B, AM, A1, A2 i A. Teoria w formie e-learningu na akredytowanej platformie, jazdy
+              dopasowane do Twojego grafiku.
+            </p>
+          </div>
+          <div class="carousel-shell" data-carousel="courses">
+            <button
+              class="carousel-button carousel-button--prev"
+              type="button"
+              aria-label="Poprzednie kursy"
+            >
+              <i data-lucide="arrow-left"></i>
+            </button>
+            <div class="course-grid carousel-track" data-courses-manifest="<?php echo esc_url(get_theme_file_uri('/courses.json')); ?>">
+              <article class="course-card course-card--featured" data-category="B" tabindex="0">
+                <div class="course-card__top">
+                  <span class="course-tag">Najpopularniejszy</span
+                  ><span class="course-number">01</span>
+                </div>
+                <h3>Kategoria B</h3>
+                <p>
+                  Kurs na samochód osobowy z jazdami na Hyundaiu i20 - identycznym
+                  jak na egzaminie.
+                </p>
+                <div class="course-meta">
+                  <span><i data-lucide="laptop"></i> Teoria w formie e-learningu</span
+                  ><span><i data-lucide="heart-pulse"></i> 4 godziny pierwszej pomocy</span
+                  ><span><i data-lucide="clock-3"></i> 30 godzin zajęć praktycznych</span>
+                </div>
+                <div class="course-price">
+                  <div>
+                    <small>cena</small><strong>4 200 <sup>PLN</sup></strong>
+                  </div>
+                  <a
+                    class="circle-link"
+                    href="#kontakt"
+                    aria-label="Wybierz kurs kategorii B"
+                    ><i data-lucide="arrow-up-right"></i
+                  ></a>
+                </div>
+              </article>
+              <article class="course-card" data-category="AM" tabindex="0">
+                <div class="course-card__top">
+                  <span class="course-tag course-tag--light">Motorower</span
+                  ><span class="course-number">02</span>
+                </div>
+                <h3>Kategoria AM</h3>
+                <p>
+                  Kurs na motorower Romet City50 (2026), z przygotowaniem do
+                  egzaminu na kategorie AM.
+                </p>
+                <div class="course-meta">
+                  <span><i data-lucide="laptop"></i> Teoria w formie e-learningu</span
+                  ><span><i data-lucide="heart-pulse"></i> 4 godziny pierwszej pomocy</span
+                  ><span><i data-lucide="clock-3"></i> 10 godzin zajęć praktycznych</span>
+                </div>
+                <div class="course-price">
+                  <div>
+                    <small>cena</small><strong>1 800 <sup>PLN</sup></strong>
+                  </div>
+                  <a
+                    class="circle-link"
+                    href="#kontakt"
+                    aria-label="Zapytaj o kurs kategorii AM"
+                    ><i data-lucide="arrow-up-right"></i
+                  ></a>
+                </div>
+              </article>
+              <article class="course-card" data-category="A1" tabindex="0">
+                <div class="course-card__top">
+                  <span class="course-tag course-tag--light">Motocykl</span
+                  ><span class="course-number">03</span>
+                </div>
+                <h3>Kategoria A1</h3>
+                <p>
+                  Kurs na motocykl Honda CB125F, z możliwością zdawania na
+                  naszym sprzęcie.
+                </p>
+                <div class="course-meta">
+                  <span><i data-lucide="laptop"></i> Teoria w formie e-learningu</span
+                  ><span><i data-lucide="heart-pulse"></i> 4 godziny pierwszej pomocy</span
+                  ><span><i data-lucide="clock-3"></i> 20 godzin zajęć praktycznych</span>
+                </div>
+                <div class="course-price">
+                  <div>
+                    <small>cena</small><strong>3 500 <sup>PLN</sup></strong>
+                  </div>
+                  <a
+                    class="circle-link"
+                    href="#kontakt"
+                    aria-label="Wybierz kurs kategorii A1"
+                    ><i data-lucide="arrow-up-right"></i
+                  ></a>
+                </div>
+              </article>
+              <article class="course-card" data-category="A2" tabindex="0">
+                <div class="course-card__top">
+                  <span class="course-tag course-tag--light">Motocykl</span
+                  ><span class="course-number">04</span>
+                </div>
+                <h3>Kategoria A2</h3>
+                <p>
+                  Yamaha MT-07 lub Honda CB500F, jazdy na znanym sprzęcie i
+                  przygotowanie pod egzamin.
+                </p>
+                <div class="course-meta">
+                  <span><i data-lucide="laptop"></i> Teoria w formie e-learningu</span
+                  ><span><i data-lucide="heart-pulse"></i> 4 godziny pierwszej pomocy</span
+                  ><span><i data-lucide="clock-3"></i> 20 godzin zajęć praktycznych</span>
+                </div>
+                <div class="course-price">
+                  <div>
+                    <small>cena</small><strong>3 800 <sup>PLN</sup></strong>
+                  </div>
+                  <a
+                    class="circle-link"
+                    href="#kontakt"
+                    aria-label="Wybierz kurs kategorii A2"
+                    ><i data-lucide="arrow-up-right"></i
+                  ></a>
+                </div>
+              </article>
+              <article class="course-card" data-category="A" tabindex="0">
+                <div class="course-card__top">
+                  <span class="course-tag course-tag--light">Motocykl</span
+                  ><span class="course-number">05</span>
+                </div>
+                <h3>Kategoria A</h3>
+                <p>
+                  Kurs na Yamaha MT-07 (2025), z jazdami przygotowującymi do
+                  egzaminu kategorii A.
+                </p>
+                <div class="course-meta">
+                  <span><i data-lucide="laptop"></i> Teoria w formie e-learningu</span
+                  ><span><i data-lucide="heart-pulse"></i> 4 godziny pierwszej pomocy</span
+                  ><span><i data-lucide="clock-3"></i> 20 godzin zajęć praktycznych</span>
+                </div>
+                <div class="course-price">
+                  <div>
+                    <small>cena</small><strong>4 000 <sup>PLN</sup></strong>
+                  </div>
+                  <a
+                    class="circle-link"
+                    href="#kontakt"
+                    aria-label="Zapytaj o kurs kategorii A"
+                    ><i data-lucide="arrow-up-right"></i
+                  ></a>
+                </div>
+              </article>
+            </div>
+            <button
+              class="carousel-button carousel-button--next"
+              type="button"
+              aria-label="Następne kursy"
+            >
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section fleet" id="flota">
+        <div class="container fleet__grid">
+          <div class="fleet__visual">
+            <div class="fleet-image">
+              <img
+                src="<?php echo esc_url(get_theme_file_uri('/assets/hyundai-i20-parking.jpg')); ?>"
+                alt="Hyundai i20 OSK Turbo na parkingu"
+              />
+            </div>
+            <div
+              class="fleet-gallery"
+              aria-label="Galeria floty OSK Turbo"
+              data-gallery-manifest="<?php echo esc_url(get_theme_file_uri('/assets/galeria/gallery.json')); ?>"
+            >
+              <figure>
+                <img src="<?php echo esc_url(get_theme_file_uri('/assets/hyundai-i20.png')); ?>" alt="Hyundai i20 OSK Turbo" />
+                <figcaption>Hyundai i20 · kat. B</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="<?php echo esc_url(get_theme_file_uri('/assets/yamaha-mt07.png')); ?>"
+                  alt="Yamaha MT-07 OSK Turbo"
+                />
+                <figcaption>Yamaha MT-07 · kat. A2/A</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                  alt="Placeholder zdjęcia floty OSK Turbo"
+                />
+                <figcaption>Flota OSK Turbo</figcaption>
+              </figure>
+            </div>
+            <!-- <div class="fleet-stamp"> 
+              <span>Flota Turbo</span><strong>na egzamin</strong>
+            </div> -->
+          </div>
+          <div class="fleet__content">
+            <div class="eyebrow">Pojazdy OSK Turbo</div>
+            <h2>Uczysz się na sprzęcie <em>zgodnym z egzaminem.</em></h2>
+            <p>
+              Samochód i motocykle są dopasowane do poszczególnych kategorii, a
+              teoria odbywa się w formie e-learningu - uczysz się swoim tempem.
+            </p>
+            <div class="fleet-list">
+              <div>
+                <span class="fleet-icon"><i data-lucide="car-front"></i></span
+                ><span
+                  ><strong>Hyundai i20</strong
+                  ><small>Kat. B · rocznik 2025</small></span
+                ><b>B</b>
+              </div>
+              <div>
+                <span class="fleet-icon"><i data-lucide="bike"></i></span
+                ><span
+                  ><strong>Romet City50</strong
+                  ><small>Kat. AM · rocznik 2026</small></span
+                ><b>AM</b>
+              </div>
+              <div>
+                <span class="fleet-icon"><i data-lucide="bike"></i></span
+                ><span
+                  ><strong>Honda CB125F</strong
+                  ><small>Kat. A1 · rocznik 2024</small></span
+                ><b>A1</b>
+              </div>
+              <div>
+                <span class="fleet-icon"><i data-lucide="bike"></i></span
+                ><span
+                  ><strong>Yamaha MT-07</strong
+                  ><small>Kat. A2 · rocznik 2025</small></span
+                ><b>A2</b>
+              </div>
+              <div>
+                <span class="fleet-icon"><i data-lucide="bike"></i></span
+                ><span
+                  ><strong>Honda CB500F</strong
+                  ><small>Kat. A2 · rocznik 2023</small></span
+                ><b>A2</b>
+              </div>
+              <div>
+                <span class="fleet-icon"><i data-lucide="bike"></i></span
+                ><span
+                  ><strong>Yamaha MT-07</strong
+                  ><small>Kat. A · rocznik 2025</small></span
+                ><b>A</b>
+              </div>
+            </div>
+            <a class="text-link" href="#kontakt"
+              >Zapytaj o najbliższy termin <i data-lucide="arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about" id="o-nas">
+        <div class="container">
+          <div class="about__grid">
+            <div>
+              <div class="eyebrow">Dlaczego OSK Turbo?</div>
+              <h2>Szkoła jazdy, która pomaga spokojnie <em>zaczynać.</em></h2>
+            </div>
+            <div>
+              <p class="about__lead">
+                Szkolimy kandydatów na kierowców kategorii B, AM, A1, A2 i A.
+                Stawiamy na praktyczne przygotowanie do egzaminu oraz wypracowaniu dobrych nawyków na drodze. Wspieramy kursantów od pierwszej teorii do zdania egzaminu.
+              </p>
+              <div class="stats">
+                <div><strong>B</strong><span>kategoria samochodowa</span></div>
+                <div><strong>AM</strong><span>Kategoria AM · motorowerowa</span></div>
+                <div><strong>A1</strong><span>kategoria motocyklowa</span></div>
+                <div>
+                  <strong>A2/A</strong><span>kategorie motocyklowe</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="values">
+            <div>
+              <span>01</span>
+              <h3>Spokojna głowa</h3>
+              <p>
+                Zero krzyku. Budujemy pewność małymi krokami i dajemy przestrzeń
+                na pytania. Ważne, abyś zrozumiał, a nie tylko powtarzał.
+              </p>
+            </div>
+            <div>
+              <span>02</span>
+              <h3>Twój rytm</h3>
+              <p>
+                Rano, po pracy, szkole, w weekend. Wspólnie znajdziemy godziny, które
+                naprawdę Ci pasują.
+              </p>
+            </div>
+            <div>
+              <span>03</span>
+              <h3>Realne wsparcie</h3>
+              <p>
+                Od pierwszej teorii do egzaminu jesteśmy po Twojej stronie i
+                odbieramy telefon.
+              </p>
+            </div>
+          </div>
+          <div class="instructors-heading">
+            <div>
+              <div class="eyebrow">Poznaj ekipę</div>
+              <h3>Po drugiej stronie <em>kierownicy.</em></h3>
+            </div>
+            <p>
+              Każdy z nas uczy trochę inaczej. Wspólny mianownik? Spokój,
+              cierpliwość i konkret.
+            </p>
+          </div>
+          <div class="carousel-shell" data-carousel="instructors">
+            <button
+              class="carousel-button carousel-button--prev"
+              type="button"
+              aria-label="Poprzedni instruktorzy"
+            >
+              <i data-lucide="arrow-left"></i>
+            </button>
+            <div class="instructors carousel-track" data-instructors-manifest="<?php echo esc_url(get_theme_file_uri('/instructors.json')); ?>">
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Jarek, instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. AM, A1, A2, A, B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Jarek</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Przemek, instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. AM, A1, A2, A, B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Przemek</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Ania, instruktorka jazdy"
+                  /><span class="instructor-chip">Instruktorka kat. AM, A1, A2, A, B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Ania</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktorki.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Michał T., instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Michał T.</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Kinga, instruktorka jazdy"
+                  /><span class="instructor-chip">Instruktor kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Kinga</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Sebastian, instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Sebastian</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Sławek, instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Sławek</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Michał S., instruktor jazdy"
+                  /><span class="instructor-chip">Instruktor kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Michał S.</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktora.</p>
+                </div>
+              </article>
+              <article class="instructor-card">
+                <div class="instructor-photo">
+                  <img
+                    src="<?php echo esc_url(get_theme_file_uri('/assets/osk-turbo3.jpg')); ?>"
+                    alt="Monika, instruktorka jazdy"
+                  /><span class="instructor-chip">Instruktorka kat. B</span>
+                </div>
+                <div class="instructor-info">
+                  <div>
+                    <h3>Monika</h3>
+                    <span>Miejsce na specjalizację i doświadczenie</span>
+                  </div>
+                  <p>Placeholder na krótkie bio instruktorki.</p>
+                </div>
+              </article>
+            </div>
+            <button
+              class="carousel-button carousel-button--next"
+              type="button"
+              aria-label="Następni instruktorzy"
+            >
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process" id="jak-zaczac">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Prościej się nie da</div>
+              <h2>Trzy kroki do <em>prawka.</em></h2>
+            </div>
+            <p>
+              Przygotuj dokumenty, załóż PKK i skontaktuj się z nami. Resztę
+              ustalimy wspólnie.
+            </p>
+          </div>
+          <div class="process-grid">
+            <article>
+              <span>01</span><i data-lucide="stethoscope"></i>
+              <h3>Badanie lekarskie</h3>
+              <p>
+                Uzyskaj orzeczenie lekarskie u lekarza uprawnionego do badań
+                kierowców.
+              </p>
+              <button
+                class="process-open"
+                type="button"
+                data-process-modal="medical"
+              >
+                Zobacz instrukcję <i data-lucide="arrow-up-right"></i>
+              </button>
+            </article>
+            <article>
+              <span>02</span><i data-lucide="file-check-2"></i>
+              <h3>Załóż PKK</h3>
+              <p>
+                Najszybsza opcja - jeżeli posiadasz Profil zaufany lub mObywatel, złóż wniosek online, dodaj skan zdjęcia, podpisu i orzeczenia, a następnie
+                odbierz numer PKK.
+                Wniosek możesz złożyć również osobiście w odpowiednim urzędzie.
+              </p>
+              <button
+                class="process-open"
+                type="button"
+                data-process-modal="pkk"
+              >
+                Zobacz instrukcję <i data-lucide="arrow-up-right"></i>
+              </button>
+            </article>
+            <article>
+              <span>03</span><i data-lucide="phone-call"></i>
+              <h3>Skontaktuj się ze szkołą</h3>
+              <p>
+                Gdy otrzymasz numer PKK, zadzwoń do nas. Ustalimy dalsze kroki i
+                termin kursu.
+              </p>
+              <button
+                class="process-open"
+                type="button"
+                data-process-modal="school"
+              >
+                Zobacz instrukcję <i data-lucide="arrow-up-right"></i>
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="process-modal"
+        data-process-dialog="medical"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="medical-title"
+        hidden
+      >
+        <div class="process-modal__backdrop" data-process-close></div>
+        <div class="process-modal__content">
+          <button
+            class="process-modal__close"
+            type="button"
+            aria-label="Zamknij instrukcję"
+            data-process-close
+          >
+            &times;
+          </button>
+          <div class="eyebrow">Krok 1 · Badanie</div>
+          <h2 id="medical-title">Uzyskaj orzeczenie lekarskie</h2>
+          <p>
+            Udaj się do lekarza uprawnionego do badań kierowców i uzyskaj
+            orzeczenie lekarskie.
+          </p>
+          <p>
+            <strong>Lekarz współpracujący z OSK Turbo:</strong><br />lek. Leszek
+            Kozieł, ul. Fabryczna 17E lok. 6. Zielona Góra, <a href="tel:+48502252263">tel. 502 252 263</a>. 
+          </p>
+          <p>
+            Skontaktuj się z lekarzem telefonicznie/przez SMS <a href="tel:+48502252263">+48 502 252 263</a>, aby potwierdzić termin i
+            godziny przyjęć.
+          </p>
+        </div>
+      </div>
+      <div
+        class="process-modal"
+        data-process-dialog="pkk"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pkk-title"
+        hidden
+      >
+        <div class="process-modal__backdrop" data-process-close></div>
+        <div class="process-modal__content">
+          <button
+            class="process-modal__close"
+            type="button"
+            aria-label="Zamknij instrukcję"
+            data-process-close
+          >
+            &times;
+          </button>
+          <div class="eyebrow">Krok 2 · PKK</div>
+          <h2 id="pkk-title">Załóż Profil Kandydata na Kierowcę</h2>
+          Jeżeli posiadasz Profil Zaufany lub mObywatel, możesz założyć Profil Kandydata na Kierowcę online.
+          <ol>
+            <li>Przygotuj aktualne, kolorowe zdjęcie 35 × 45 mm. (takie jak do dowodu osobistego) i wykonaj skan.</li>
+            <li>
+              Wejdź na
+              <a
+                href="https://info-kierowca.pl/"
+                target="_blank"
+                rel="noreferrer"
+                >info-kierowca.pl</a
+              >
+              i zaloguj się przez Profil Zaufany lub mObywatel.
+            </li>
+            <li>Najpierw uzupełnij dane swojego profilu i wybierz właściwy urząd. (zobacz zrzut ekranu 1.)</li>
+            <li>Kliknij „Wniosek o Prawo Jazdy” w menu po lewej stronie, wybierz "Wydanie prawa jazdy" jako Rodzaj sprawy oraz odpowiednią kategorię. (zrzut ekranu nr 2.)</li>
+            <li>Na kolejnym ekranie sprawdź poprawność wprowadzonych danych, zaznacz odpowiednie wymagane pola i potwierdź wniosek. (zrzut ekranu nr 3.)</li>
+            <li>W kolejnym kroku załącz skan orzeczenia lekarskiego oraz zaznacz wymagane oświadczenia zgodnie ze stanem faktycznym (zrzut ekranu nr 4.)</li>
+            <li>W kolejnych krokach załącz skan zdjęcia oraz podpisu, zweryfikuj prawidłowość danych we wniosku, podpisz wniosek przez mObywatela lub Profil Zaufany oraz dokonaj płatności</li>
+            <li>
+              Po weryfikacji odbierz numer PKK SMS-em, e-mailem lub w systemie. Weryfikacja wniosku nie powinna zająć więcej, niż 2 dni robocze. 
+            </li>
+          </ol>
+          Ścieżka dla osobistego składania wniosku:<br>
+          Podążaj za wskazówkami z sekcji "Co musisz przygotować" na stronie <a href="https://www.gov.pl/web/gov/uzyskaj-prawo-jazdy" target="_blank" rel="noreferrer">https://www.gov.pl/web/gov/uzyskaj-prawo-jazdy</a>.
+          <br>
+          <p class="process-modal__note">
+            Pamiętaj, aby po nadaniu numeru PKK online dostarczyć do urzędu oryginał orzeczenia lekarskiego,
+            możesz to zrobić również pocztą na adres Wydziału Komunikacji. (dla Zielonej Góry jest to Wydział Komunikacji Zielona Góra, ul. Sienkiewicza 8a, 65-443 Zielona Góra)
+          </p>
+          <div
+            class="process-modal__screenshots"
+            aria-label="Instrukcja zakładania PKK"
+          >
+            <figure>
+              <img src="<?php echo esc_url(get_theme_file_uri('/assets/Instrukcja_PKK/1.png')); ?>" alt="Instrukcja PKK, zrzut ekranu 1" />
+              <figcaption>Zrzut ekranu 1</figcaption>
+            </figure>
+            <figure>
+              <img src="<?php echo esc_url(get_theme_file_uri('/assets/Instrukcja_PKK/2.png')); ?>" alt="Instrukcja PKK, zrzut ekranu 2" />
+              <figcaption>Zrzut ekranu 2</figcaption>
+            </figure>
+            <figure>
+              <img src="<?php echo esc_url(get_theme_file_uri('/assets/Instrukcja_PKK/3.png')); ?>" alt="Instrukcja PKK, zrzut ekranu 3" />
+              <figcaption>Zrzut ekranu 3</figcaption>
+            </figure>
+            <figure>
+              <img src="<?php echo esc_url(get_theme_file_uri('/assets/Instrukcja_PKK/4.png')); ?>" alt="Instrukcja PKK, zrzut ekranu 4" />
+              <figcaption>Zrzut ekranu 4</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div
+        class="process-modal"
+        data-process-dialog="school"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="school-title"
+        hidden
+      >
+        <div class="process-modal__backdrop" data-process-close></div>
+        <div class="process-modal__content">
+          <button
+            class="process-modal__close"
+            type="button"
+            aria-label="Zamknij instrukcję"
+            data-process-close
+          >
+            &times;
+          </button>
+          <div class="eyebrow">Krok 3 · OSK Turbo</div>
+          <h2 id="school-title">Skontaktuj się ze szkołą</h2>
+          <p>
+            Gdy otrzymasz numer PKK, zadzwoń do nas, wyślij SMS, wiadomość na Whatsapp lub e-mail. Podaj numer PKK i ustalmy dalszcze szczegóły.
+          </p>
+          <p>
+            Wspólnie ustalimy terminy teorii i jazd oraz
+            dalsze formalności.
+          </p>
+          <div class="process-modal__actions">
+            <a class="button button--accent" href="#kontakt" data-process-close
+              >Skontaktuj się z nami <i data-lucide="arrow-up-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <section class="section testimonials">
+        <div class="container">
+          <div class="section-heading testimonial-heading">
+            <div>
+              <div class="eyebrow">Opinie kursantów</div>
+              <h2>Ważne, żeby po kursie <em>jechać pewniej.</em></h2>
+            </div>
+            <p>
+              Zobacz, co mówią o nas nasi Kursanci. <a href="https://www.google.com/maps/place/Turbo+nauka+jazdy/@51.9329918,15.486356,128m/data=!3m1!1e3!4m8!3m7!1s0x47061159b44bcab9:0x8b5328de26cd92ad!8m2!3d51.9332506!4d15.4863037!9m1!1b1!16s%2Fg%2F11btyt1dtp?entry=ttu&g_ep=EgoyMDI2MDkxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer"><em>Więcej opinii</em></a>
+            </p>
+          </div>
+          <div class="carousel-shell" data-carousel="testimonials">
+            <button
+              class="carousel-button carousel-button--prev"
+              type="button"
+              aria-label="Poprzednie opinie"
+            >
+              <i data-lucide="arrow-left"></i>
+            </button>
+            <div
+              class="testimonial-track carousel-track"
+              data-testimonials-manifest="<?php echo esc_url(get_theme_file_uri('/testimonials.json')); ?>"
+              aria-live="polite"
+            ></div>
+            <button
+              class="carousel-button carousel-button--next"
+              type="button"
+              aria-label="Następne opinie"
+            >
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="kontakt">
+        <div class="container contact__grid">
+          <div>
+            <div class="eyebrow eyebrow--light">Zapisy do OSK Turbo</div>
+            <h2>Masz pytania?<br /><em>Porozmawiajmy.</em></h2>
+            <p>
+              Skontaktuj się z nami - chętnie odpowiemy i pomożemy rozwiać wszelkie wątpliwości.
+            </p>
+            <div class="contact-details">
+              <a href="tel:+48663268845"
+                ><i data-lucide="phone"></i
+                ><span><small>Przemek</small>663 268 845</span></a
+              ><a href="tel:+48603534827"
+                ><i data-lucide="phone"></i
+                ><span><small>Jarek</small>603 534 827</span></a
+              ><a href="mailto:turbo@turbo.zgora.pl"
+                ><i data-lucide="mail"></i
+                ><span><small>E-mail</small>turbo@turbo.zgora.pl</span></a
+              >
+            </div>
+            <div class="contact-socials">
+              <p>Nie zapomnij zaobserwować nas w social mediach</p>
+              <div class="contact-socials__links">
+                <a
+                  href="https://www.facebook.com/p/OSK-Turbo-61565422284140/?_rdr"
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg class="facebook-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M24 12.07C24 5.43 18.63 0 12 0S0 5.43 0 12.07c0 6.02 4.39 11 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.58-4.71 1.33 0 2.72.24 2.72.24v3.01H15.9c-1.51 0-1.98.94-1.98 1.9v2.22h3.37l-.54 3.49h-2.83V24C19.61 23.07 24 18.09 24 12.07Z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/turbo_osk/"
+                  aria-label="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg class="camera-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="contact__action">
+            <div class="eyebrow eyebrow--light">Szybki kontakt</div>
+            <h3>Wolisz zostawić wiadomość?</h3>
+            <p>Wypełnij krótki formularz, a odezwiemy się z informacjami o kursie.</p>
+            <button class="button button--accent" type="button" data-process-modal="contact-form">
+              Otwórz formularz <i data-lucide="arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="category-modal" data-category-dialog hidden role="dialog" aria-modal="true" aria-labelledby="category-modal-title">
+      <div class="category-modal__backdrop" data-category-close></div>
+      <div class="category-modal__content">
+        <button class="category-modal__close" type="button" aria-label="Zamknij informacje o kategorii" data-category-close>&times;</button>
+        <div class="eyebrow">Informacje o kategorii</div>
+        <h2 id="category-modal-title"></h2>
+        <p class="category-modal__age"></p>
+        <div class="category-modal__description"></div>
+        <a class="category-modal__source" href="https://www.gov.pl/web/gov/kategorie-prawa-jazdy" target="_blank" rel="noopener noreferrer">
+          Sprawdź pełne informacje na gov.pl <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="process-modal contact-form-modal" data-process-dialog="contact-form" hidden role="dialog" aria-modal="true" aria-labelledby="contact-form-title">
+      <div class="process-modal__backdrop" data-process-close></div>
+      <div class="process-modal__content">
+        <button class="process-modal__close" type="button" aria-label="Zamknij formularz" data-process-close>&times;</button>
+        <div class="eyebrow">Formularz kontaktowy</div>
+        <h2 id="contact-form-title">Napisz do nas.</h2>
+        <iframe
+          class="contact-form-modal__iframe"
+          src="https://forms.gle/daFrkLwP4N2oTpi78"
+          title="Formularz kontaktowy OSK Turbo"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer__top">
+        <a class="brand brand--footer" href="#top" aria-label="OSK Turbo - strona główna">
+          <img class="brand__logo brand__logo--pink" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_1.png')); ?>" alt="OSK Turbo" />
+          <img class="brand__logo brand__logo--pink-flame" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_1.png')); ?>" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_2.png')); ?>" alt="" aria-hidden="true" />
+          <img class="brand__logo brand__logo--gold-flame" src="<?php echo esc_url(get_theme_file_uri('/assets/turbo_logo_2.png')); ?>" alt="" aria-hidden="true" />
+        </a>
+        <p>Nauka jazdy B, AM, A1, A2 i A · Zielona Góra</p>
+        <div class="socials">
+          <a
+            href="https://www.facebook.com/p/OSK-Turbo-61565422284140/?_rdr"
+            aria-label="Facebook"
+            ><svg class="facebook-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M24 12.07C24 5.43 18.63 0 12 0S0 5.43 0 12.07c0 6.02 4.39 11 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.79-4.71 4.58-4.71 1.33 0 2.72.24 2.72.24v3.01H15.9c-1.51 0-1.98.94-1.98 1.9v2.22h3.37l-.54 3.49h-2.83V24C19.61 23.07 24 18.09 24 12.07Z" />
+            </svg>
+          </a><a
+            href="https://www.instagram.com/turbo_osk/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg class="camera-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2" />
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="container footer__bottom">
+        <span>© <span id="year"></span> OSK Turbo Zielona Góra.</span
+        ><span>turbo@turbo.zgora.pl</span>
+      </div>
+    </footer>
+    <?php wp_footer(); ?>
+  </body>
+</html>
